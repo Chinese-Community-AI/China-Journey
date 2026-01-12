@@ -18,6 +18,15 @@ export default class WorldScene extends Phaser.Scene {
         if (!this.textures.exists('npc')) {
             this.createFallbackTexture('npc', 0x2ecc71);
         }
+        if (!this.textures.exists('npc_elder')) {
+            this.createFallbackTexture('npc_elder', 0x4caf50);
+        }
+        if (!this.textures.exists('npc_merchant')) {
+            this.createFallbackTexture('npc_merchant', 0x9c27b0);
+        }
+        if (!this.textures.exists('npc_villager')) {
+            this.createFallbackTexture('npc_villager', 0x795548);
+        }
         
         // Create map
         for (let y = 0; y < 19; y++) {
@@ -70,8 +79,9 @@ export default class WorldScene extends Phaser.Scene {
 
     createNPCs() {
         // Elder (starting NPC)
+        const elderTex = this.textures.exists('npc_elder') ? 'npc_elder' : 'npc';
         this.npcs.elder = {
-            sprite: this.physics.add.staticSprite(200, 200, 'npc'),
+            sprite: this.physics.add.staticSprite(200, 200, elderTex),
             id: 'elder',
             name: 'Village Elder',
             x: 200,
@@ -85,8 +95,9 @@ export default class WorldScene extends Phaser.Scene {
         this.npcs.elder.sprite.setScale(1.5);
 
         // Merchant
+        const merchantTex = this.textures.exists('npc_merchant') ? 'npc_merchant' : 'npc';
         this.npcs.merchant = {
-            sprite: this.physics.add.staticSprite(600, 200, 'npc'),
+            sprite: this.physics.add.staticSprite(600, 200, merchantTex),
             id: 'merchant',
             name: 'Merchant',
             x: 600,
@@ -98,8 +109,9 @@ export default class WorldScene extends Phaser.Scene {
         this.npcs.merchant.sprite.setScale(1.5);
 
         // Villager
+        const villagerTex = this.textures.exists('npc_villager') ? 'npc_villager' : 'npc';
         this.npcs.villager = {
-            sprite: this.physics.add.staticSprite(400, 150, 'npc'),
+            sprite: this.physics.add.staticSprite(400, 150, villagerTex),
             id: 'villager',
             name: 'Villager',
             x: 400,
