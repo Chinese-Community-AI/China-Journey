@@ -3,6 +3,10 @@ export default class BattleScene extends Phaser.Scene {
         super('BattleScene');
     }
 
+    init(data) {
+        this.questBattle = data && data.questBattle;
+    }
+
     create() {
         // Ensure textures exist
         if (!this.textures.exists('player')) {
@@ -200,17 +204,21 @@ export default class BattleScene extends Phaser.Scene {
 
     victory() {
         this.messageText.setText('Victory! You gained 50 XP and 20 Gold.');
-        this.time.delayedCall(2000, () => this.endBattle());
+        this.time.delayedCall(2000, () => this.endBattle(true));
     }
 
     defeat() {
         this.messageText.setText('Defeat... Returning to Peach Blossom Village.');
         this.time.delayedCall(2000, () => {
-            window.location.reload();
+            this.endBattle(false);
         });
     }
 
-    endBattle() {
+    endBattle(victory) {
+        const worldScene = this.scene.get('WorldScene');
+        if (worldScene && worldScene.isActive()) {
+            worldScene.onBattleComplete(victory);
+        }
         this.scene.stop('BattleScene');
         this.scene.resume('WorldScene');
     }

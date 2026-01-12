@@ -2,6 +2,7 @@ import BootScene from './scenes/BootScene.js';
 import WorldScene from './scenes/WorldScene.js';
 import BattleScene from './scenes/BattleScene.js';
 import UIScene from './scenes/UIScene.js';
+import EndingScene from './scenes/EndingScene.js';
 
 // Verify Phaser is loaded
 if (typeof Phaser === 'undefined') {
@@ -27,7 +28,7 @@ if (typeof Phaser === 'undefined') {
                 debug: false
             }
         },
-        scene: [BootScene, WorldScene, BattleScene, UIScene]
+        scene: [BootScene, WorldScene, BattleScene, UIScene, EndingScene]
     };
 
     try {
